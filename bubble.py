@@ -58,19 +58,7 @@ def load_and_clean_data(file_path):
 
 # 原生的 Markdown 报告生成函数
 def get_zeus_style_insight(model, df):
-    # sample_reviews = df[df['content'].str.len() > 20].sample(min(100, len(df)))['content'].tolist()
-    # 1. 先过滤出有效评论（字数大于 20 的）
-    valid_reviews_df = df[df['content'].str.len() > 20]
-
-    # 2. 根据过滤后的真实数量决定采样数，最多 100 条
-    sample_size = min(100, len(valid_reviews_df))
-
-    # 3. 如果有效评论数为 0，直接返回空列表避免报错；否则正常采样
-if sample_size == 0:
-    sample_reviews = []
-else:
-    sample_reviews = valid_reviews_df.sample(sample_size)['content'].tolist()
-    
+    sample_reviews = df[df['content'].str.len() > 20].sample(min(100, len(df)))['content'].tolist()    
     text_to_analyze = "\n".join(sample_reviews)
     
     prompt = f"""
